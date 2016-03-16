@@ -17,9 +17,9 @@ estimate_damage_location.pl
  [PreCR]: https://www.neb.com/products/m0309-precr-repair-mix 
 
 ##TYPICAL WORKFLOW :
-[1] Adaptor trimming.
-[2] Mapping reads to the genome : BWA mem paired-end mode.
-[3] Create first in pair mapped reads (bam1) and 
+-Adaptor trimming.
+-Mapping reads to the genome : BWA mem paired-end mode.
+-Create first in pair mapped reads (bam1) and 
 
 
 

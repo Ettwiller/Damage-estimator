@@ -9,8 +9,7 @@ Prior to running the Damage estimator workflow please download and install the f
 ##OVERVIEW
 This set of programs are designed to estimate the DNA damage when the DNA is sequenced using Illumina. 
 The repository contains 1 basic programs :
-
- 1. estimate_damage_location.pl
+estimate_damage_location.pl
  
  
  ##CONSIDERATIONS :

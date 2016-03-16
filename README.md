@@ -25,9 +25,13 @@ estimate_damage_location.pl
 
 ##DETAILS OF THE MAIN PROGRAMS :
 
+### 1. estimate_damage_location.pl :
 
+EXAMPLE :
+```
+estimate_damage_location.pl  --mpileup1 file1.mpileup --mpileup2 file2.mpileup ---out file.damage --id idx12 --qualityscore 25 (DEFAULT 30) 
 
-
+```
 
 
 

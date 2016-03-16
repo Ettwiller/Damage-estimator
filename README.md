@@ -12,7 +12,18 @@ estimate_damage_location.pl
  
  
 ##CONSIDERATIONS :
- Damage estimation is based on the systematics mutation rate difference between the first in pair and the second in pair reads. Therefore it is essential that the sequencing is done using Illumina in a paired end mode. BWA mapping is recommended and mapping in paired-end mode is required. To estimate damage in an independent way, DNA sample can be treated with [PreCR][PreCR]
+ Damage estimation is based on the systematics mutation rate difference between the first in pair and the second in pair reads. Therefore it is essential that the sequencing is done using Illumina in a paired end mode. BWA mapping is recommended and mapping in paired-end mode is required. To estimate damage in an independent way, DNA sample can be treated with [PreCR][PreCR]. 
+ 
  [PreCR]: https://www.neb.com/products/m0309-precr-repair-mix 
 
 ##TYPICAL WORKFLOW :
+[1] Adaptor trimming.
+[2] Mapping reads to the genome : BWA mem paired-end mode.
+[3] Create first in pair mapped reads (bam1) and 
+
+
+
+
+
+
+

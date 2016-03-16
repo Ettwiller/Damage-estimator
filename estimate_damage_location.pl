@@ -5,7 +5,7 @@ use File::Temp qw(tempfile);
 
 my $error_sentence = "USAGE : perl $0 --mpileup1 mileup_file_from_first_in_pair_read --mpileup2 mileup_file_from_second_in_pair_read --out damage_file_for_R --id library_name \nOPTIONAL : --qualityscore 35 (DEFAULT 30) \n";
 
-#options :
+# declare the options upfront :
 my $file_R1;
 my $file_R2;
 my $out;
@@ -27,7 +27,9 @@ GetOptions ("mpileup1=s" => \$file_R1,    # the mpileup file from the first in p
 if (!$file_R1 || !$file_R2 || !$out || !$generic) {die $error_sentence}
 #=================================
 
-
+#do not override a file ==========
+if(-e $out) { die "File $out Exists, please remove old file or rename output file (--out)"};
+#================================= 
 
 
 my %RC;
@@ -61,9 +63,16 @@ $RC{'T_+'} = 'A_+';
 $RC{'C_+'} = 'G_+';
 $RC{'G_+'} = 'C_+';
 
-
+#start the main program =============================
 my $relative_count_R1 = get_relative_count($file_R1);
 my $relative_count_R2 = get_relative_count($file_R2);
+#====================================================
+
+#open the output file ====================================
+open(OUT, ">$out") or die "can't save result into $out\n";
+#=========================================================  
+
+
 #go over all the mutation possibilities :
 foreach my $type (keys %RC)
 
@@ -79,12 +88,15 @@ foreach my $type (keys %RC)
 	{
 	   
 
-	    print OUT "$generic\t$type\tR1\t$value1\t$position\n";
-	    print OUT "$generic\t$type\tR2\t$value2\t$position\n";
+	    print OUT "$generic\t$type\tR1\t$value1\t$abs1\t$position\n";
+	    print OUT "$generic\t$type\tR2\t$value2\t$abs2\t$position\n";
 	}
     }
 }
 close OUT;
+
+
+
 sub clean_bases{
     #remove unwanted sign (insertion / deletion (but retain the + and - and remove the first and last base information)
     my ($pattern, $n)=@_; #for example : ,$,,

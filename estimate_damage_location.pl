@@ -1,21 +1,34 @@
 #!/usr/bin/perl
 use strict;
+use Getopt::Long qw(GetOptions);
+use File::Temp qw(tempfile);
 
+my $error_sentence = "USAGE : perl $0 --mpileup1 mileup_file_from_first_in_pair_read --mpileup2 mileup_file_from_second_in_pair_read --out damage_file_for_R --id library_name \nOPTIONAL : --qualityscore 35 (DEFAULT 30) \n";
 
-
-
-
-
-#CONSTANCES
+#options :
+my $file_R1;
+my $file_R2;
+my $out;
+my $generic;
 my $QUALITY_CUTOFF = 30;
 
 
-#THIS PROGRAM IS USED BY THE MAIN PROGRAM DAMAGE-ESTIMATOR
-my $file_R1 = $ARGV[0]; #read 1 mpileup file. 
-my $file_R2 = $ARGV[1]; #read 2 mpileup file. 
-my $generic = $ARGV[2]; #name of the result files containing the damages
+#get options :
+GetOptions ("mpileup1=s" => \$file_R1,    # the mpileup file from the first in pair read
+	    "mpileup2=s" => \$file_R2, #the mpileup file from the second in pair read
+	    "qualityscore=s" => \$QUALITY_CUTOFF,#base quality (either direct from Illumina or recalibrated)
+	    "out=s" => \$out,#output file name.
+	    "id=s" => \$generic
+	       
+    ) or die $error_sentence;
 
-if (!$file_R1 || !$file_R2 || !$file_R2) {die "you need to provide read1 mpileup file read2 mpileup file and name of the result files containing the damages\n"};
+#=================================
+#if something went wrong in getting the option, notify :
+if (!$file_R1 || !$file_R2 || !$out || !$generic) {die $error_sentence}
+#=================================
+
+
+
 
 my %RC;
 $RC{'A_C'} = 'T_G';
@@ -51,9 +64,9 @@ $RC{'G_+'} = 'C_+';
 
 my $relative_count_R1 = get_relative_count($file_R1);
 my $relative_count_R2 = get_relative_count($file_R2);
-
+#go over all the mutation possibilities :
 foreach my $type (keys %RC)
-#foreach my $type (keys %$relative_count_R1)
+
 {
     my $ref = $$relative_count_R1{$type};
     foreach my $position (sort {$a<=>$b} keys %$ref)
@@ -66,12 +79,12 @@ foreach my $type (keys %RC)
 	{
 	   
 
-	    print "$generic\t$type\tR1\t$value1\t$position\n";
-	    print "$generic\t$type\tR2\t$value2\t$position\n";
+	    print OUT "$generic\t$type\tR1\t$value1\t$position\n";
+	    print OUT "$generic\t$type\tR2\t$value2\t$position\n";
 	}
     }
 }
-
+close OUT;
 sub clean_bases{
     #remove unwanted sign (insertion / deletion (but retain the + and - and remove the first and last base information)
     my ($pattern, $n)=@_; #for example : ,$,,

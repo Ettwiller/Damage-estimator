@@ -19,7 +19,11 @@ estimate_damage_location.pl
 ##TYPICAL WORKFLOW :
 - Adaptor trimming.
 - Mapping reads to the genome : BWA mem paired-end mode.
-- Create first in pair mapped reads (bam1) and 
+- Create first in pair mapped reads file (bam1) and second in pair mapped reads (bam2) and derived respective mpileup files (mpileup1 and mpileup2) using
+- Calculate damage using ```estimate_damage_location.pl```
+- plot result using xx.R
+
+
 
 
 

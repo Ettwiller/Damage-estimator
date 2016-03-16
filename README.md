@@ -23,6 +23,9 @@ estimate_damage_location.pl
 - Calculate damage using ```estimate_damage_location.pl```
 - plot result using xx.R
 
+##DETAILS OF THE MAIN PROGRAMS :
+
+
 
 
 

@@ -4,9 +4,10 @@
 Prior to running the Damage estimator workflow please download and install the following programs :
 
 **SAMTOOLS** (http://samtools.sourceforge.net/)
+**GGPLOT2 (R)** (http://ggplot2.org/)
 
 ##OVERVIEW
-This set of programs are designed to estimate the DNA damage when the DNA is sequenced using Illumina. 
+This set of programs are designed to estimate the DNA damage when the DNA is sequenced using Illumina plateform on paired-end mode. 
 The repository contains 1 basic programs :
 estimate_damage_location.pl
  
@@ -21,7 +22,7 @@ estimate_damage_location.pl
 - Mapping reads to the genome : BWA mem paired-end mode.
 - Create first in pair mapped reads file (bam1) and second in pair mapped reads (bam2) and derived respective mpileup files (mpileup1 and mpileup2) using
 - Calculate damage using ```estimate_damage_location.pl```
-- plot result using xx.R
+- plot result using plot_damage_location.R
 
 ##DETAILS OF THE MAIN PROGRAMS :
 
@@ -32,6 +33,9 @@ EXAMPLE :
 estimate_damage_location.pl  --mpileup1 file1.mpileup --mpileup2 file2.mpileup ---out file.damage --id idx12 --qualityscore 25 (DEFAULT 30) 
 
 ```
+DESCRIPTION :
+
+```estimate_damage_location.pl``` Is the main program to calculate the mutation rate for all the substitution including indels. The output of the program can be visualized using plot_damage_location.R. 
 
 
 

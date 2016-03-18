@@ -19,12 +19,12 @@ Damage estimation is based on the systematics mutation rate difference between t
 
 ##TYPICAL WORKFLOW :
 - Adaptor trimming.
-- Mapping reads to the genome : BWA mem paired-end mode.
+- Mapping reads to the genome : BWA mem paired-end mode. Make a bam file from the resulting sam file (samtools view -bS sam_file | samtools sort - bam_file) and index the resulting bam file (samtools index bam_file).
 - Create first in pair mapped reads file (bam1) and second in pair mapped reads (bam2) and derived respective mpileup files (mpileup1 and mpileup2) using ```split_mapped_reads.pl```
 - Calculate damage using ```estimate_damage_location.pl```
 - plot result using ```plot_damage_location.R```
 
-##DETAILS OF THE MAIN PROGRAMS :
+##DETAILS OF THE ANALYSIS :
 
 ### 1. split_mapped_reads.pl :
 
@@ -44,9 +44,3 @@ OPTIONS :
 OUTPUT :
 The output of ```estimate_damage_location.pl``` is a table delimited file that can be directly used by ```plot_damage_location.R``` to visualized the damage function of the read positions. 
 ****
-
-
-
-
-
-

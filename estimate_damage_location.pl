@@ -3,7 +3,7 @@ use strict;
 use Getopt::Long qw(GetOptions);
 use File::Temp qw(tempfile);
 
-my $error_sentence = "USAGE : perl $0 --mpileup1 mileup_file_from_first_in_pair_read --mpileup2 mileup_file_from_second_in_pair_read --out damage_file_for_R --id library_name \nOPTIONAL : --qualityscore 35 (DEFAULT 30) \n";
+my $error_sentence = "USAGE : perl $0 --mpileup1 mileup_file_from_first_in_pair_read --mpileup2 mileup_file_from_second_in_pair_read --out damage_file_for_R --id library_name \nOPTIONAL :\n --qualityscore 35 (DEFAULT 30)\n --min_coverage_limit 10 (DEFAULT 1)\n --max_coverage_limit 500 (DEFAULT 100)\n";
 
 # declare the options upfront :
 my $file_R1;
@@ -11,14 +11,17 @@ my $file_R2;
 my $out;
 my $generic;
 my $QUALITY_CUTOFF = 30;
-
+my $COV_MIN = 1;
+my $COV_MAX = 100;
 
 #get options :
 GetOptions ("mpileup1=s" => \$file_R1,    # the mpileup file from the first in pair read
 	    "mpileup2=s" => \$file_R2, #the mpileup file from the second in pair read
 	    "qualityscore=s" => \$QUALITY_CUTOFF,#base quality (either direct from Illumina or recalibrated)
 	    "out=s" => \$out,#output file name.
-	    "id=s" => \$generic
+	    "id=s" => \$generic,
+	    "min_coverage_limit=s" => \$COV_MIN,
+	    "max_coverage_limit=s" => \$COV_MAX
 	       
     ) or die $error_sentence;
 
@@ -164,7 +167,7 @@ sub get_relative_count {
 	my @tmp = split //, $bases;
 	my @poss = split/,/, $pos;
 	my $length_mutation = @tmp;
-	if ($number == $length_mutation && $number > 0 && $number < 10 && $ref =~/[ACTG]/)
+	if ($number == $length_mutation && $number >= $COV_MIN && $number <= $COV_MAX && $ref =~/[ACTG]/)
 	    #$number == $length_mutation : making sure that the position array and base array are in agreement. 
 	    # $number > 0  : position with at least one read
 	    #$number < 10  : at 2 M reads across the human genome we are not expecting tp have a high coverage. #!!! be careful of other species.

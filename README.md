@@ -22,18 +22,23 @@ Damage estimation is based on the systematics mutation rate difference between t
 - Mapping reads to the genome : BWA mem paired-end mode. Make a bam file from the resulting sam file (samtools view -bS sam_file | samtools sort - bam_file) and index the resulting bam file (samtools index bam_file).
 - Create first in pair mapped reads file (bam1) and second in pair mapped reads (bam2) and derived respective mpileup files (mpileup1 and mpileup2) using ```split_mapped_reads.pl```
 - Calculate damage using ```estimate_damage_location.pl```
+- concatenate all the damages into one single file for plotting. 
 - plot result using ```plot_damage_location.R```
 
 ##DETAILS OF THE ANALYSIS :
 
 ### 1. split_mapped_reads.pl :
 
+EXAMPLE :
+```perl split_mapped_reads.pl -bam bam_file.bam -genome genome.fasta -mpileup1 file1.mpileup -mpileup2 file2.mpileup -Q 20 (DEFAULT 0) -q 20 (DEFAULT 10)```
 
+DESCRIPTION :
+```split_mapped_reads.pl``` is the program to split the mapped first in paired reads into one temporary bam file and the mapped second in paired reads into another temporary bam file. From these files are derived mpileup file 1 and mpileup file 2 resperctively. 
 
 ### 1. estimate_damage_location.pl :
 
 EXAMPLE :
-```estimate_damage_location.pl  --mpileup1 file1.mpileup --mpileup2 file2.mpileup ---out file.damage --id idx12 --qualityscore 25 (DEFAULT 30) ```
+```perl estimate_damage_location.pl  --mpileup1 file1.mpileup --mpileup2 file2.mpileup ---out file.damage --id idx12 --qualityscore 25 (DEFAULT 30) ```
 
 DESCRIPTION :
 

@@ -59,5 +59,9 @@ OPTIONS :
 ```--qualityscore MIN``` : Discard the match or mismatch if the base on a read has less than MIN base quality. Important parameters. The lower this limit is, the less the damage is apparent. 
 
 OUTPUT :
-The output of ```estimate_damage_location.pl``` is a table delimited file that can be directly used by ```plot_damage_location.R``` to visualized the damage function of the read positions. 
+The output of ```estimate_damage_location.pl``` is a table delimited file that can be directly used by ```plot_damage_location.R``` to visualized the damage function of the read positions. The columns are the following :
+"id","type","read","count","abs","loc"
+
+
+
 ****

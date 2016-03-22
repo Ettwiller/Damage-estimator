@@ -1,0 +1,51 @@
+#!/usr/bin/env ruby
+
+def usage
+  $stderr.puts("Usage: #{File.basename($0)} <lines> <filename>")
+  exit(1)
+end
+
+parameters = []
+options = []
+verbose = false
+
+ARGV.each do |arg|
+  if arg[0] == '-'
+    options << arg
+  else
+    parameters << arg
+  end
+end
+
+if parameters.length != 2 then
+  usage()
+end
+
+options.each do |option|
+  case option
+  when '-v'
+    verbose = true
+  when '-h'
+    usage()
+  end
+end
+
+lines = parameters[0].to_i
+filename = parameters[1]
+
+if lines < 1
+  $stderr.puts("at least one line please")
+  exit(1)
+end
+
+filesize = File.size(filename)
+
+File.open(filename) do |f|
+  for i in 0...lines
+    start = i * filesize / lines
+    position = start + rand(filesize / lines)
+    f.pos = position - 1
+    f.gets
+    puts f.gets
+  end
+end

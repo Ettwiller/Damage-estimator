@@ -167,6 +167,10 @@ sub get_relative_count {
 	my @tmp = split //, $bases;
 	my @poss = split/,/, $pos;
 	my $length_mutation = @tmp;
+
+
+
+
 	if ($number == $length_mutation && $number >= $COV_MIN && $number <= $COV_MAX && $ref =~/[ACTG]/)
 	    #$number == $length_mutation : making sure that the position array and base array are in agreement. 
 	    # $number > 0  : position with at least one read

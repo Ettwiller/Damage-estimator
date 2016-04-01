@@ -3,7 +3,7 @@ use strict;
 use Getopt::Long qw(GetOptions);
 use File::Temp qw(tempfile);
 
-my $error_sentence = "USAGE : perl $0 --mpileup1 mileup_file_from_first_in_pair_read --mpileup2 mileup_file_from_second_in_pair_read --out damage_file_for_R --id library_name \nOPTIONAL :\n --qualityscore 35 (DEFAULT 30)\n --min_coverage_limit 10 (DEFAULT 1)\n --max_coverage_limit 500 (DEFAULT 100) --soft_masked 1 (DEFAULT 1)\n";
+my $error_sentence = "USAGE : perl $0 --mpileup1 mileup_file_from_first_in_pair_read --mpileup2 mileup_file_from_second_in_pair_read --out damage_file_for_R --id library_name \nOPTIONAL :\n --qualityscore 35 (DEFAULT 30)\n --min_coverage_limit 10 (DEFAULT 1)\n --max_coverage_limit 500 (DEFAULT 100) --soft_masked 1 (DEFAULT 1) --context 1 (DEFAULT 3)\n";
 
 # declare the options upfront :
 my $file_R1;
@@ -14,6 +14,7 @@ my $QUALITY_CUTOFF = 30;
 my $COV_MIN = 1;
 my $COV_MAX = 100;
 my $SOFT_MASKED=1;
+my $CONTEXT =3;
 #get options :
 GetOptions (    "mpileup1=s" => \$file_R1,    # the mpileup file from the first in pair read
 	        "mpileup2=s" => \$file_R2, #the mpileup file from the second in pair read
@@ -22,7 +23,8 @@ GetOptions (    "mpileup1=s" => \$file_R1,    # the mpileup file from the first 
 	        "id=s" => \$generic,
 	        "min_coverage_limit=s" => \$COV_MIN,
 	        "max_coverage_limit=s" => \$COV_MAX,
-	        "soft_masked=s" => \$SOFT_MASKED
+	        "soft_masked=s" => \$SOFT_MASKED,
+		"context=s" => \$CONTEXT
     ) or die $error_sentence;
 
 #=================================
@@ -135,8 +137,12 @@ sub get_relative_count {
 	    my $nt1 = get_nt($l1);
 	    my $nt2 = get_nt($l2);
 	    my $nt3 = get_nt($l3);
-	    my $seq_all = $nt1."_base_".$nt3;
 	    
+	    my $seq_all = "no_context";
+	    if ($CONTEXT == 1){$seq_all = $nt1."_base"; }
+	    if ($CONTEXT == 2){$seq_all = "base_".$nt3; }
+	    if ($CONTEXT == 3){$seq_all = $nt1."_base_".$nt3; }
+
 	    my $seq = uc($seq_all);
 	    my ($chr,$loc,$ref, $number, $dbases,$q1, $q2, $pos) = split /\t/, $l2;
 	    my $bases = clean_bases($dbases, $number); 

@@ -81,6 +81,23 @@ OUTPUT :
 The output of ```estimate_damage_location.pl``` is a table delimited file that can be directly used by ```plot_damage_location.R``` to visualized the damage function of the read positions. The columns are the following :
 "id","type","read","count","abs","loc"
 
+### 1. estimate_damage_location_context.pl :
+
+EXAMPLE :
+```perl estimate_damage_location_context.pl  --mpileup1 file1.mpileup --mpileup2 file2.mpileup ---out file.damage --id idx12 --qualityscore 25 (DEFAULT 30)  --max_coverage_limit 200 --min_coverage_limit 10 --context 1
+
+OPTIONS :
+
+Options are the same as for the estimate_damage_location.pl excpet for ```---context```
+
+```---context``` correspond to the context of the damage. There are 3 possibilities : 
+	[1] ```---context 1 ``` The damage is analysed function of the 5' nucleotide (C_[base], G_[base], T_[base] and A_[base])
+    
+    [2] ```---context 2 ``` The damage is analysed function of the 5' nucleotide (C_[base], G_[base], T_[base] and A_[base])
+    
+    [3] ```---context 3 ``` The damage is analysed function of the 5' nucleotide (C_[base], G_[base], T_[base] and A_[base])
+    
+
 
 
 ****

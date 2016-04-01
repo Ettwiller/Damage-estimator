@@ -93,9 +93,9 @@ Options are the same as for the estimate_damage_location.pl excpet for ```---con
 ```---context``` correspond to the context of the damage. There are 3 possibilities : 
 	[1] ```---context 1 ``` The damage is analysed function of the 5' nucleotide (C_[base], G_[base], T_[base] and A_[base])
     
-    [2] ```---context 2 ``` The damage is analysed function of the 5' nucleotide (C_[base], G_[base], T_[base] and A_[base])
+    [2] ```---context 2 ``` The damage is analysed function of the 3' nucleotide ([base]_C, [base]_G, [base]_T and [base]_A)
     
-    [3] ```---context 3 ``` The damage is analysed function of the 5' nucleotide (C_[base], G_[base], T_[base] and A_[base])
+    [3] ```---context 3 ``` The damage is analysed function of the 5' and 3' nucleotides (C_[base]_T, C_[base]_C, C_[base]_G, C_[base]_A, G_[base]_T ....)
     
 
 

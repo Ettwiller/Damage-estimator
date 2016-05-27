@@ -99,7 +99,3 @@ Options are the same as for the estimate_damage_location.pl excpet for ```---con
     
     [3] ```---context 3 ``` The damage is analysed function of the 5' and 3' nucleotides (C_[base]_T, C_[base]_C, C_[base]_G, C_[base]_A, G_[base]_T ....)
     
-
-
-
-****

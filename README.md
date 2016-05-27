@@ -6,14 +6,14 @@ Prior to running the Damage estimator workflow please download and install the f
 **SAMTOOLS** (http://samtools.sourceforge.net/)
 **GGPLOT2 (R)** (http://ggplot2.org/)
 
-##OVERVIEW
+##OVERVIEW :
 
 This set of programs are designed to estimate the DNA damage when the DNA is sequenced using Illumina plateform on paired-end mode. 
 The repository contains 3 basic programs
 
-```split_mapped_reads.pl```
-```estimate_damage_location.pl```
-```estimate_damage_location_context.pl```
+- Split the paired end reads into R1 and R2 using ```split_mapped_reads.pl```
+- Estimate the damage across the reads using ```estimate_damage_location.pl```
+- Estimate the damage across the reads relative to the nucleotide context using ```estimate_damage_location_context.pl```
  
 ##CONSIDERATIONS :
 Damage estimation is based on the systematics mutation rate difference between the first in pair and the second in pair reads. Therefore it is essential that the sequencing is done using Illumina in a paired end mode. BWA mapping is recommended and mapping in paired-end mode is required. The estimation of damage is a global estimation based in a imbalance between R1 and R2 variant frequency (see publication). Thus a minimum of 1 million mapped read is the limit for detection. 

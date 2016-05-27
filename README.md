@@ -24,27 +24,27 @@ To estimate damage in an independent way, DNA sample can be treated with [PreCR]
 
 ##TYPICAL WORKFLOW :
 
-#Primary analysis : 
+###Primary analysis : 
 - Adaptor trimming (using your favorite algorithm).
 - Mapping reads to the genome : BWA mem paired-end mode. Make a bam file from the resulting sam file (samtools view -bS sam_file | samtools sort - bam_file) and index the resulting bam file (samtools index bam_file). Other mapping algorithm can be used but no guaranteed. Local realignment using GATK can be optionally performed.  
 
-#Split the reads to estimate the imbalance :
+###Split the reads to estimate the imbalance :
 
 - Create first in pair mapped reads file (bam1) and second in pair mapped reads (bam2) and derived respective mpileup files (mpileup1 and mpileup2) using ```split_mapped_reads.pl```
 
-#No context no position on the reads (just the basic degree of damage):
+###No context no position on the reads (just the basic degree of damage):
 
 - Calculate damage using ```estimate_damage.pl```
 - concatenate all the damages into one single file for plotting.
 plot result using ```plot_damage.R```
 
-#No context but damage relative to read position: 
+###No context but damage relative to read position: 
 
 - Calculate damage using ```estimate_damage_location.pl```
 - concatenate all the damages into one single file for plotting. 
 - plot result using ```plot_damage_location.R```
 
-#Context and read positions : 
+###Context and read positions : 
 
 - Calculate damage using ```estimate_damage_location_context.pl```
 - concatenate all the damages into one single file for plotting. 

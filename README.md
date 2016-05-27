@@ -7,8 +7,10 @@ Prior to running the Damage estimator workflow please download and install the f
 **GGPLOT2 (R)** (http://ggplot2.org/)
 
 ##OVERVIEW
+
 This set of programs are designed to estimate the DNA damage when the DNA is sequenced using Illumina plateform on paired-end mode. 
 The repository contains 3 basic programs :
+
 ```split_mapped_reads.pl```
 ```estimate_damage_location.pl```
 ```estimate_damage_location_context.pl```

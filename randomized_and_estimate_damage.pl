@@ -49,7 +49,7 @@ for (my $i =0; $i <$N; $i++)
     my $tmp_R2 = new File::Temp( UNLINK => 1 );                                                                                            
     my $c1 = "$dirname/randomized2 $SAMPLE $file_R1 > $tmp_R1";
     my $c2 = "$dirname/randomized2 $SAMPLE $file_R2 > $tmp_R2";
-    my $c3 = "perl $dirname/estimate_mutation.pl --mpileup1 $tmp_R1 --mpileup2 $tmp_R2 --id $generic --qualityscore $QUALITY_CUTOFF --min_coverage_limit $COV_MIN --max_coverage_limit $COV_MAX --soft_masked $SOFT_MASKED >> $out";
+    my $c3 = "perl $dirname/estimate_damage.pl --mpileup1 $tmp_R1 --mpileup2 $tmp_R2 --id $generic --qualityscore $QUALITY_CUTOFF --min_coverage_limit $COV_MIN --max_coverage_limit $COV_MAX --soft_masked $SOFT_MASKED >> $out";
     system($c1);
     system($c2);
     system($c3);

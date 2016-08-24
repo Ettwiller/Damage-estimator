@@ -1,41 +1,41 @@
+#!/usr/bin/env Rscript   
 library(ggplot2)
 
-mutation <- read.table("all_for_R", header=FALSE, sep="")
+
+args <- commandArgs(TRUE)
+
+
+
+
+if (length(args)<2) {
+  stop("At least two argument must be supplied [1] imput_file (output of estimate_damage.pl) and [2] output file (for example figure1.png)", call.=FALSE)
+}
+
+
+mutation <- read.table(args[1], header=FALSE, sep="")
 colnames(mutation) <- c("abs","type","experiment","count","family", "damage");
-typ = unique(mutation$type)
-#typ <- c("A_C","A_T","T_G","T_A","G_T","G_C","C_A","C_G","A_G","T_C","G_A","C_T","G_G","C_C","A_A","T_T")
+
+typ <-c("G_T", "C_A", "C_T", "G_A", "T_A","A_T","A_G", "T_C","C_G","G_C","T_G","A_C")
+new_mutation = subset(mutation,  type %in% typ)
+new_mutation$type <- factor(new_mutation$type, level=typ)
 
 
-
-
+#change if you wish to keep only ertain experiments (not all)
 keep_only <- unique(mutation$experiment)
-#keep_only <- c()
-
 new_mutation = subset(mutation,  experiment %in% keep_only)
 new_mutation$experiment <- factor(new_mutation$experiment, level=keep_only)
+#coloring scheme (feel free to change)
+local_color <- c("cornflowerblue", "royalblue4","grey1", "grey10","grey20", "grey30", "grey40", "grey50", "grey60", "grey70", "grey80", "grey90", "grey100")
+
+d<-ggplot(new_mutation, aes(x = reorder(type, damage), y = log2(damage), color=type)) + 
+  geom_point(position=position_jitter(height = 0.25), alpha = 0.6, size=0.5) +    
+    scale_colour_manual(values = local_color) +
+  geom_hline(yintercept= log2(1.5), color = "grey") +
+
+  theme(panel.background = element_rect(fill = 'white', colour = 'white'), 
+        legend.position="none", axis.text.x = element_text(angle = 90, hjust = 1, size=11)) +
+  #ylim(0, 1) +
+  ggtitle("GIV scores")
+ggsave(args[2], d, width=9, height=6) 
 
 
-exp = unique(new_mutation$experiment)
-l = length(keep_only)
-
-#local_color <- c("blue", "orange", "red", "brown4", "blue", "orange", "red", "brown4","royalblue4","slateblue4","slateblue2" ,"black")
-local_color <- c("darkblue", "blue", "slateblue4", "orange","orange", "orange","orange", "red","blue", "orange","orange", "orange","orange", "orange", "orange","orange", "blue", "red","orange","blue", "red","orange","blue", "orange","blue", "orange")
-
-vector = c()
-for (selected_type in typ)
-{
-  file_name = paste(selected_type, "_all.png")
-  
-  sub <- mutation[ which(mutation$type==selected_type), ]
-  
-  tiff(file_name,  width = 1000, height = 700, units = "px") 
-  par(mar=c(2,2,2,2), oma=c(20,1,1,1))
-  stripchart(count~experiment, subset = type ==selected_type, data = new_mutation,pch = 21, bg = "#00000050",vertical = TRUE, las =3, at = 1:l, method = "jitter",jitter =0.4, cex=1, col = local_color,  ylab="enrichment")
-  
-  
-  #    boxplot(count~experiment, subset = type ==selected_type, at = 1:l +0.25, boxwex = 0.25, data = new_mutation, cex = 1, add = TRUE, outline = FALSE, col="gold", bty="n", xaxt="n")
-  mtext(selected_type, cex=1.5)
-  dev.off()
-
-  
-}

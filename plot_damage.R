@@ -25,10 +25,10 @@ new_mutation$type <- factor(new_mutation$type, level=typ)
 local_color <- c("cornflowerblue", "royalblue4","grey1", "grey10","grey20", "grey30", "grey40", "grey50", "grey60", "grey70", "grey80", "grey90", "grey100")
 
 d<-ggplot(new_mutation, aes(x = reorder(type, damage), y = log2(damage), color=type)) + 
-  geom_point(position=position_jitter(height = 0.25), alpha = 0.6, size=0.5) +    
+  geom_point(position=position_jitter(height = 0.25), alpha = 0.6, size=1.5) +    
     scale_colour_manual(values = local_color) +
-  geom_hline(yintercept= log2(1.5), color = "grey") +
-
+  geom_hline(yintercept= log2(1.5), color = "#990000", linetype="dashed") +
+ geom_hline(yintercept= 0, color = "grey") +	
   theme(panel.background = element_rect(fill = 'white', colour = 'white'), 
         legend.position="none", axis.text.x = element_text(angle = 90, hjust = 1, size=11)) +
   #ylim(0, 1) +

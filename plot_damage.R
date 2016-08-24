@@ -20,10 +20,7 @@ new_mutation = subset(mutation,  type %in% typ)
 new_mutation$type <- factor(new_mutation$type, level=typ)
 
 
-#change if you wish to keep only ertain experiments (not all)
-keep_only <- unique(mutation$experiment)
-new_mutation = subset(mutation,  experiment %in% keep_only)
-new_mutation$experiment <- factor(new_mutation$experiment, level=keep_only)
+
 #coloring scheme (feel free to change)
 local_color <- c("cornflowerblue", "royalblue4","grey1", "grey10","grey20", "grey30", "grey40", "grey50", "grey60", "grey70", "grey80", "grey90", "grey100")
 

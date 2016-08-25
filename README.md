@@ -66,7 +66,13 @@ Damage estimation is based on the systematics mutation rate difference between t
 
 -```perl estimate_damage_location.pl --mpileup1 file1.mpileup --mpileup2 file2.mpileup --id TE_shear --qualityscore 25 (DEFAULT 30) --out TE_shear.damage```
 
+-```Rscript --vanilla  plot_damage_location.R TE_shear.damage TE_shear.pdf
 
+### Getting the damage relative to read position (Similar to Supplementary Figure 1) :
+
+-```perl split_mapped_reads.pl -bam bam_file.bam -genome genome.fasta -mpileup1 file1.mpileup -mpileup2 file2.mpileup -Q 20 (DEFAULT 0) -q 20 (DEFAULT 10)```
+
+-```perl estimate_damage_location_context.pl --mpileup1 file1.mpileup --mpileup2 file2.mpileup --id TE_shear --qualityscore 25 (DEFAULT 30) --out TE_shear.damage --context 2```
 
 
 
@@ -151,7 +157,7 @@ OPTIONS :
 
 OUTPUT :
 The output of ```estimate_damage_location.pl``` is a table delimited file that can be directly used by ```plot_damage_location.R``` to visualized the damage function of the read positions. The columns are the following :
-"id","type","read","count","abs","loc"
+"id (from the --id option","Variant type","read (R1 or R2)","count (freq)","abs (absolute counts)","position on the read"
 
 ### 4. estimate_damage_location_context.pl :
 
@@ -160,12 +166,18 @@ EXAMPLE :
 
 OPTIONS :
 
-Options are the same as for the estimate_damage_location.pl excpet for ```---context```
+Options are the same as for the estimate_damage_location.pl excpet for ```--context```
 
-```---context``` correspond to the context of the damage. There are 3 possibilities : 
-	[1] ```---context 1 ``` The damage is analysed function of the 5' nucleotide (C_[base], G_[base], T_[base] and A_[base])
+```--context``` correspond to the context of the damage. There are 3 possibilities : 
+	[1] ```--context 1 ``` The damage is analysed function of the 5' nucleotide (C_[base], G_[base], T_[base] and A_[base])
     
-    [2] ```---context 2 ``` The damage is analysed function of the 3' nucleotide ([base]_C, [base]_G, [base]_T and [base]_A)
+    [2] ```--context 2 ``` The damage is analysed function of the 3' nucleotide ([base]_C, [base]_G, [base]_T and [base]_A)
     
-    [3] ```---context 3 ``` The damage is analysed function of the 5' and 3' nucleotides (C_[base]_T, C_[base]_C, C_[base]_G, C_[base]_A, G_[base]_T ....)
+    [3] ```--context 3 ``` The damage is analysed function of the 5' and 3' nucleotides (C_[base]_T, C_[base]_C, C_[base]_G, C_[base]_A, G_[base]_T ....)
     
+With [base] being the variant analyzed.
+
+OUTPUT :
+The output of ```estimate_damage_location_context.pl``` is a table delimited file that can be directly used by ```plot_damage_location_context.R``` to visualized the damage function of the read positions within nucleotide context. The columns are the following :
+
+"id (from the --id option)", "Variant type","read (R1 or R2)","counts (freq)","position on the read", "context", "absolute counts"

@@ -34,7 +34,7 @@ annotate("text", x= 3, y = log2(1.6), label = "Above this line one third of vari
   theme(panel.background = element_rect(fill = 'white', colour = 'white'), 
         legend.position="bottom", axis.text.x = element_text(angle = 90, hjust = 1, size=11)) +
   #ylim(0, 1) +
-  ggtitle("GIV scores for variant types")
+ggtitle("GIV scores for variant types")
 ggsave(args[2], d, width=9, height=6) 
 
 

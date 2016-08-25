@@ -54,11 +54,19 @@ Damage estimation is based on the systematics mutation rate difference between t
 ## EXAMPLES
 
 ### Getting the GIV scores (Similar to Figure 2) :
-```perl split_mapped_reads.pl -bam bam_file.bam -genome genome.fasta -mpileup1 file1.mpileup -mpileup2 file2.mpileup -Q 20 (DEFAULT 0) -q 20 (DEFAULT 10)```
-```perl estimate_damage.pl --mpileup1 file1.mpileup --mpileup2 file2.mpileup --id TE_shear --qualityscore 25 (DEFAULT 30) > TE_shear.damage```
-```Rscript --vanilla plot_damage.R TE_shear.damage TE_shear.png```
+-```perl split_mapped_reads.pl -bam bam_file.bam -genome genome.fasta -mpileup1 file1.mpileup -mpileup2 file2.mpileup -Q 20 (DEFAULT 0) -q 20 (DEFAULT 10)```
+
+-```perl estimate_damage.pl --mpileup1 file1.mpileup --mpileup2 file2.mpileup --id TE_shear --qualityscore 25 (DEFAULT 30) > TE_shear.damage```
+
+-```Rscript --vanilla plot_damage.R TE_shear.damage TE_shear.png``` OR ```Rscript --vanilla plot_damage.R TE_shear.damage TE_shear.pdf```
 
 ### Getting the damage relative to read position (Similar to Figure 1C) :
+
+-```perl split_mapped_reads.pl -bam bam_file.bam -genome genome.fasta -mpileup1 file1.mpileup -mpileup2 file2.mpileup -Q 20 (DEFAULT 0) -q 20 (DEFAULT 10)```
+
+-```perl estimate_damage_location.pl --mpileup1 file1.mpileup --mpileup2 file2.mpileup --id TE_shear --qualityscore 25 (DEFAULT 30) --out TE_shear.damage```
+
+
 
 
 

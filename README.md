@@ -74,6 +74,7 @@ Damage estimation is based on the systematics mutation rate difference between t
 
 -```perl estimate_damage_location_context.pl --mpileup1 file1.mpileup --mpileup2 file2.mpileup --id TE_shear --qualityscore 25 (DEFAULT 30) --out TE_shear.damage --context 2```
 
+-```Rscript --vanilla  plot_damage_location_context.R TE_shear.damage TE_shear.pdf
 
 
 

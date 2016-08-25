@@ -112,10 +112,16 @@ OPTIONS :
 
 ```--qualityscore MIN``` OPTIONAL, default=30 : Discard the match or mismatch if the base on a read has less than MIN base quality. Important parameters. The lower this limit is, the less the damage is apparent.
 
+```--max_coverage_limit MAX (DEFAULT 100)``` : If a position has equal or more than MAX reads (R1 or R2), the position is not used to calculate the damage. This option is to avoid high coverage regions of the genome being the main driver for the damage estimation program. Increase it to very a high number if your coverage is high. 
+
+```--min_coverage_limit MIN (DEFAULT 1)``` : If a position has equal or less than MIN reads (R1 or R2), the position is not used to calculate the damage. This option is to calculate damage only in on-target regions (in cases of enrichment protocol such as exome ....).
+
+
+
 OUTPUT : 
 The output of the estimate_damage.pl program in out_file consist of 6 columns : [1] raw count of variant type [2] variant type (ex. G_T, G to T) [3] id (from the --id option) [4] frequency of variant [5] family (the variant type and reverse complement) [6] GIV-score  . If you have followthe standard protocol for acoustic shearing during library preparation you should obtain a GIV score for G_T around 2. You can directly feed this file to plot_damage.R or concatenates with other files and plot the concatenated file with plot_damage.R  : 
 
-
+Rscript --vanilla plot_damage.R out_file (from the estimate_damage.pl program) name_of_figure.png``` OR ```Rscript --vanilla plot_damage.R out_file (from the estimate_damage.pl program) name_of_figure.pdf
 
 
 ### 3. estimate_damage_location.pl :

@@ -1,9 +1,16 @@
+#!/usr/bin/env Rscript
 library(ggplot2)
+library(reshape2)
+
+args <- commandArgs(TRUE)
+if (length(args)<2) {
+  stop("At least two argument must be supplied [1] imput_file (output of estimate_damage.pl) and [2] output file (for example figure1.png)", call.=FALSE)
+}
+argument2 = args[2]
 
 
 
-
-mutation <- read.table("Damage_estimation_for_Run_NoPreCRBQ5BC5_S2_L001_R1_001_val_1.fq", header=FALSE, sep="")
+mutation <- read.table(args[1], header=FALSE, sep="")
 colnames(mutation) <- c("experiment","type","read","count","abs","loc");
 
 typ = unique(mutation$type)
@@ -20,18 +27,19 @@ local_color <- c("red", "brown","royalblue4","green","orange","slateblue2" ,"pur
 
 for (selected_type in typ)
 {
-    file_name = paste(selected_type, "_UDG_effect.png" ,sep="")
-    
+
+    out = paste(selected_type, argument2, sep = "_")
+       
     d<-ggplot(subset(new_mutation,type %in% c(selected_type))) + 
       geom_point(aes(x=loc, y=count, group=experiment, color=experiment, shape=read)) +
       facet_grid(~read, scales = "fixed") +
-      scale_colour_manual(values = local_color) + 
+#      scale_colour_manual(values = local_color) + 
       theme(panel.background = element_rect(fill = 'white', colour = 'white')) +
       #theme(legend.position = "none") +      
       #scale_x_continuous(limits = c(0, 100)) +
      # scale_y_continuous(limits = c(0, 0.013)) +
       ggtitle(selected_type)
-    ggsave(file_name, d, width=15, height=10) 
+    ggsave(out, d, width=15, height=10) 
   
    
 }

@@ -1,4 +1,4 @@
-#!/usr/bin/env Rscript
+1;2c#!/usr/bin/env Rscript
 library(ggplot2)
 library(reshape2)
 
@@ -22,7 +22,9 @@ new_mutation$experiment <- factor(new_mutation$experiment, level=keep_only)
 
 exp = unique(new_mutation$experiment)
 l = length(keep_only)
-local_color <- c("red", "brown","royalblue4","green","orange","slateblue2" ,"purple","brown4","brown1", "orange","royalblue4", "orange", "royalblue1", "yellow", "slateblue4","red","brown4")
+
+local_color <- rainbow(l)
+
 
 
 for (selected_type in typ)
@@ -33,7 +35,7 @@ for (selected_type in typ)
     d<-ggplot(subset(new_mutation,type %in% c(selected_type))) + 
       geom_point(aes(x=loc, y=count, group=experiment, color=experiment, shape=read)) +
       facet_grid(context~read, scales = "free") +
-#      scale_colour_manual(values = local_color) + 
+      scale_colour_manual(values = local_color) + 
       theme(panel.background = element_rect(fill = 'white', colour = 'white')) +
       #theme(legend.position = "none") +      
       #scale_x_continuous(limits = c(0, 100)) +

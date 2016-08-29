@@ -39,17 +39,26 @@ Damage estimation is based on the systematics mutation rate difference between t
 - Concatenate all the damages into one single file for plotting.
 - Plot result using ```plot_damage.R```
 
+
+![alt tag](https://github.com/Ettwiller/Damage-estimator/blob/master/figures/Output_of_plot_damage_R.png)
+
+
 ###No context but damage relative to read position: 
 
 - Calculate damage using ```estimate_damage_location.pl```
 - concatenate all the damages into one single file for plotting. 
 - plot result using ```plot_damage_location.R```
 
+![alt tag](https://github.com/Ettwiller/Damage-estimator/blob/master/figures/Output_of_plot_damage_location_R.png)
+
 ###Context and read positions : 
 
 - Calculate damage using ```estimate_damage_location_context.pl```
 - concatenate all the damages into one single file for plotting. 
 - plot result using ```plot_damage_location_context.R```
+
+![alt tag](https://github.com/Ettwiller/Damage-estimator/blob/master/figures/Output_of_plot_damage_location_context_R.png)
+
 
 ## EXAMPLES
 

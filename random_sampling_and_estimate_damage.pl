@@ -7,7 +7,7 @@ my $dirname = dirname(__FILE__);
 
 
 
-my $error_sentence = "USAGE : perl $0 --mpileup1 mileup_file_from_first_in_pair_read --mpileup2 mileup_file_from_second_in_pair_read --out damage_file_for_R --id library_name \nOPTIONAL :\n --qualityscore 35 (DEFAULT 30)\n --min_coverage_limit 10 (DEFAULT 1)\n --max_coverage_limit 500 (DEFAULT 100) --soft_masked 1 (DEFAULT 0)\n";
+my $error_sentence = "USAGE : perl $0 --mpileup1 mileup_file_from_first_in_pair_read --mpileup2 mileup_file_from_second_in_pair_read --out damage_file_for_R --id library_name \nOPTIONAL :\n --qualityscore 35 (DEFAULT 30)\n --min_coverage_limit 10 (DEFAULT 1)\n --max_coverage_limit 500 (DEFAULT 100) --soft_masked 1 (DEFAULT 0) -n 100 (DEFAULT 20)\n";
 
 # declare the options upfront :                                                                                                             
 my $file_R1;

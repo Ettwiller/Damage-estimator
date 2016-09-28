@@ -35,12 +35,21 @@ Damage estimation is based on the systematics mutation rate difference between t
 
 ###No context no position on the reads (just the basic degree of damage):
 
-- Calculate damage using ```estimate_damage.pl``` or ```randomized_and_estimate_damage.pl```
+- Calculate damage using ```estimate_damage.pl``` 
 - Concatenate all the damages into one single file for plotting.
 - Plot result using ```plot_damage.R```
 
 
 ![alt tag](https://github.com/Ettwiller/Damage-estimator/blob/master/figures/Output_of_plot_damage_R.png)
+
+###No context but random sampling :
+
+- Calculate damage using ```random_sampling_and_estimate_damage.pl```
+- Concatenate all the damage files into one single file for plotting.
+- Plot result using ```plot_random_sampling_damage.R ```
+
+![alt tag](https://github.com/Ettwiller/Damage-estimator/blob/master/figures/Output_of_plot_random_sampling_damage_R.png)
+
 
 
 ###No context but damage relative to read position: 
@@ -140,7 +149,18 @@ The output of the estimate_damage.pl program in out_file consist of 6 columns : 
 Rscript --vanilla plot_damage.R out_file (from the estimate_damage.pl program) name_of_figure.png``` OR ```Rscript --vanilla plot_damage.R out_file (from the estimate_damage.pl program) name_of_figure.pdf
 
 
-### 3. estimate_damage_location.pl :
+### 3. random_sampling_and_estimate_damage.pl :
+
+EXAMPLE :
+
+DESCRIPTION :
+
+OPTIONS :
+
+
+
+
+### 4. estimate_damage_location.pl :
 
 EXAMPLE :
 ```perl estimate_damage_location.pl  --mpileup1 file1.mpileup --mpileup2 file2.mpileup ---out file.damage --id idx12 --qualityscore 25 (DEFAULT 30)  --max_coverage_limit 200 --min_coverage_limit 10 ```
@@ -169,7 +189,7 @@ OUTPUT :
 The output of ```estimate_damage_location.pl``` is a table delimited file that can be directly used by ```plot_damage_location.R``` to visualized the damage function of the read positions. The columns are the following :
 "id (from the --id option","Variant type","read (R1 or R2)","count (freq)","abs (absolute counts)","position on the read"
 
-### 4. estimate_damage_location_context.pl :
+### 5. estimate_damage_location_context.pl :
 
 EXAMPLE :
 ```perl estimate_damage_location_context.pl  --mpileup1 file1.mpileup --mpileup2 file2.mpileup ---out file.damage --id idx12 --qualityscore 25 (DEFAULT 30)  --max_coverage_limit 200 --min_coverage_limit 10 --context 1

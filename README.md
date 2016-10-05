@@ -86,7 +86,7 @@ Damage estimation is based on the systematics mutation rate difference between t
 
 -```Rscript --vanilla  plot_damage_location.R TE_shear.damage TE_shear.pdf
 
-### Getting the damage relative to read position (Similar to Supplementary Figure 1) :
+### Getting the damage relative to read position AND context (Similar to Supplementary Figure 1) :
 
 -```perl split_mapped_reads.pl -bam bam_file.bam -genome genome.fasta -mpileup1 file1.mpileup -mpileup2 file2.mpileup -Q 20 (DEFAULT 0) -q 20 (DEFAULT 10)```
 

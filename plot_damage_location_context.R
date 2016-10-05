@@ -1,4 +1,4 @@
-1;2c#!/usr/bin/env Rscript
+#!/usr/bin/env Rscript
 library(ggplot2)
 library(reshape2)
 
